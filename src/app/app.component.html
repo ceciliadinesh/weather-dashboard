@@ -1,0 +1,36 @@
+<header class="navbar">
+  <a class="brand" routerLink="/">
+    <img
+      src="https://cdn-icons-png.flaticon.com/512/869/869869.png"
+      alt="Weather Dashboard Logo"
+      class="brand-logo"
+    />
+    <span>Weather <strong>Dashboard</strong></span>
+  </a>
+
+  <nav>
+    <a
+      routerLink="/"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      Home
+    </a>
+
+    <a routerLink="/weather" routerLinkActive="active">
+      Weather
+    </a>
+
+    <a routerLink="/about" routerLinkActive="active">
+      About
+    </a>
+  </nav>
+</header>
+
+<main class="main-content">
+  <router-outlet></router-outlet>
+</main>
+
+<footer>
+  <p>Weather Dashboard | by CECILIA DINESH | ME-275</p>
+</footer>

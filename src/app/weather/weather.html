@@ -1,0 +1,136 @@
+<div class="weather-page">
+
+  <!-- Header -->
+  <header class="search-header">
+    <div class="brand-icon">
+      <img src="https://cdn-icons-png.flaticon.com/512/869/869869.png" alt="Weather icon">
+    </div>
+    <h1>Weather Dashboard</h1>
+    <p>Discover the weather in any city around the world.</p>
+  </header>
+
+  <!-- Search Form -->
+  <form class="search-form" (ngSubmit)="searchWeather()">
+    <div class="input-wrapper">
+      <span class="search-icon">⌕</span>
+
+      <input
+        type="text"
+        name="city"
+        [(ngModel)]="city"
+        placeholder="Search for a city..."
+        autocomplete="off"
+        aria-label="City name"
+      />
+    </div>
+
+    <button type="submit" [disabled]="loading">
+      {{ loading ? 'Searching...' : 'Search Weather' }}
+    </button>
+  </form>
+
+  <!-- Loading -->
+  <div *ngIf="loading" class="loading">
+    <div class="spinner"></div>
+    <p>Getting the latest weather...</p>
+  </div>
+
+  <!-- Error -->
+  <div *ngIf="errorMessage && !loading" class="error">
+    <span>⚠️</span>
+    <p>{{ errorMessage }}</p>
+  </div>
+
+  <!-- Weather Result -->
+  <section *ngIf="weather as w" class="weather-card">
+
+    <div class="weather-heading">
+      <div>
+        <p class="location-label">CURRENT WEATHER</p>
+        <h2>{{ w.name }}, {{ w.sys.country }}</h2>
+        <p class="condition">
+          {{ w.weather[0].description }}
+        </p>
+      </div>
+
+      <img
+        [src]="w.weather[0].icon"
+        [alt]="w.weather[0].description"
+        class="weather-icon"
+      />
+    </div>
+
+    <div class="temperature-section">
+      <h3 class="temperature">
+        {{ w.main.temp | number:'1.0-1' }}<span>°C</span>
+      </h3>
+
+      <p class="feels-like">
+        Feels like {{ w.main.feels_like | number:'1.0-1' }}°C
+      </p>
+    </div>
+
+    <div class="weather-divider"></div>
+
+    <!-- Weather Details -->
+    <div class="weather-details">
+
+      <div class="detail">
+        <div class="detail-icon humidity-icon">💧</div>
+        <div class="detail-text">
+          <span>Humidity</span>
+          <strong>{{ w.main.humidity }}%</strong>
+        </div>
+      </div>
+
+      <div class="detail">
+        <div class="detail-icon wind-icon">💨</div>
+        <div class="detail-text">
+          <span>Wind Speed</span>
+          <strong>{{ w.wind.speed }} km/h</strong>
+        </div>
+      </div>
+
+      <div class="detail">
+        <div class="detail-icon pressure-icon">🌡️</div>
+        <div class="detail-text">
+          <span>Pressure</span>
+          <strong>{{ w.main.pressure | number:'1.0-0' }} hPa</strong>
+        </div>
+      </div>
+
+    </div>
+
+    <p class="note">
+      Weather information provided by Open-Meteo
+    </p>
+
+  </section>
+
+  <!-- Initial State -->
+  <section *ngIf="!weather && !loading && !errorMessage"
+           class="empty-state">
+    <div class="empty-icon">🌍</div>
+    <h2>Explore the weather</h2>
+    <p>Enter a city name above to see its current weather conditions.</p>
+
+    <div class="city-suggestions">
+      <button type="button" (click)="city='Mumbai'; searchWeather()">
+        Mumbai
+      </button>
+
+      <button type="button" (click)="city='London'; searchWeather()">
+        London
+      </button>
+
+      <button type="button" (click)="city='Tokyo'; searchWeather()">
+        Tokyo
+      </button>
+    </div>
+  </section>
+
+  <footer class="page-footer">
+    Made with <span>♥</span> for your Weather Dashboard project
+  </footer>
+
+</div>

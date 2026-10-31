@@ -1,0 +1,57 @@
+:host {
+  display: block;
+  min-height: 100vh;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  padding: 18px 7%;
+  background: #123b65;
+}
+
+.brand {
+  color: white;
+  font-size: 22px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+nav {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+}
+
+nav a:hover,
+nav a.active {
+  background: #2879b9;
+}
+
+main {
+  min-height: calc(100vh - 130px);
+}
+
+footer {
+  padding: 12px;
+  text-align: center;
+  color: white;
+  background: #123b65;
+}
+
+@media (max-width: 600px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
